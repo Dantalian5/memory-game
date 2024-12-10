@@ -1,0 +1,19 @@
+.switch-btn {
+  color: var(--foreground);
+  position: relative;
+  display: block;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+  padding: 2px;
+
+  &__sun,
+  &__moon {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+  }
+}

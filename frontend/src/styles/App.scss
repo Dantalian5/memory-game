@@ -1,0 +1,27 @@
+.body {
+  width: 100%;
+  max-width: 90rem;
+  min-height: 100dvh;
+  padding-inline: 9.375rem;
+  background-color: var(--background);
+  font-family: "Raleway", sans-serif;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.topbar {
+  width: 100%;
+  padding-inline: 1.5rem;
+  padding-block: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    font-family: "Yuji Mai", serif;
+    font-size: 3rem;
+
+  }
+}
