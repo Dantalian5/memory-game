@@ -1,34 +1,16 @@
 import "@styles/Board.scss";
 import { useState, useEffect } from "react";
+import { useGameContext } from "@/context/GameContext";
 
 function Board() {
-  const [cards, setCards] = useState<number[]>([]);
+  const gameContext = useGameContext();
+
+  const { gameState, setGameState, initializeGame, gameSetup } = gameContext;
+  const { cards, attempts } = gameState;
+  const { matchesCuantity } = gameSetup;
+
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [matchedCards, setMatchedCards] = useState<number[]>([]);
-  const [attempts, setAttempts] = useState<number>(0);
-
-  useEffect(() => {
-    initializeGame();
-  }, []);
-
-  const matrixSize = [4, 2];
-  const totalCards = matrixSize[0] * matrixSize[1];
-  const matchesCuantity = 2;
-
-  const initializeGame = () => {
-    const baseCards = Array.from(
-      { length: totalCards / matchesCuantity },
-      (_, i) => i,
-    );
-    const shuffledCards = Array(matchesCuantity)
-      .fill(baseCards)
-      .flat()
-      .sort(() => Math.random() - 0.5);
-    setCards(shuffledCards);
-    setFlippedCards([]);
-    setMatchedCards([]);
-    setAttempts(0);
-  };
 
   const handleCardClick = (index: number) => {
     if (
@@ -45,13 +27,13 @@ function Board() {
   const checkMatch = (flippedCards: number[]) => {
     if (flippedCards.every((card) => cards[card] === cards[flippedCards[0]])) {
       setMatchedCards((prev) => [...prev, cards[flippedCards[0]]]);
-      setAttempts((prev) => prev + 1);
+      setGameState((prev) => ({ ...prev, attempts: prev.attempts + 1 }));
     }
     setTimeout(() => setFlippedCards([]), 1000);
   };
   useEffect(() => {
     setTimeout(() => {
-      if (matchedCards.length === totalCards / matchesCuantity) {
+      if (matchedCards.length === cards.length / matchesCuantity) {
         alert(`You won in ${attempts} attempts!`);
         initializeGame();
       }
