@@ -16,7 +16,7 @@ const TimeProvider = ({ children }: { children: ReactNode }) => {
     if (!isRunning) {
       setTime(0);
     } else {
-      let interval: any;
+      let interval: NodeJS.Timeout;
       if (isRunning) {
         interval = setInterval(() => {
           setTime((prev) => prev + 1);

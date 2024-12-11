@@ -16,10 +16,6 @@ interface GameState {
   attempts: number;
   isRunning: boolean;
 }
-interface GameSetup {
-  boardSize: number[];
-  matchingCards: number;
-}
 interface GameContextType {
   gameState: GameState;
   initializeGame: () => void;
