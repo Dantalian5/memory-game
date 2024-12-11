@@ -60,6 +60,7 @@
     justify-content: center;
     align-items: center;
     font-size: 2rem;
+
   }
 
   &__front {
@@ -71,6 +72,16 @@
     & svg {
       width: 80%;
       height: 80%;
+    }
+  }
+
+  &__back {
+    font-size: 1rem;
+
+    & svg {
+      width: 80%;
+      height: 80%;
+      max-width: 100px;
     }
   }
 }

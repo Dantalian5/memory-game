@@ -1,4 +1,5 @@
 import "@styles/components/Card.scss";
+import { svgLogo } from "@/utils/svgIcons";
 
 interface CardProps {
   children: React.ReactNode;
@@ -41,7 +42,7 @@ function Card({ children, isFlipped, isMatched, onClick }: CardProps) {
       >
         <div className="card__inner">
           <div className="card__front">{children}</div>
-          <div className="card__back">{"</>"}</div>
+          <div className="card__back">{svgLogo}</div>
         </div>
       </div>
     </div>
