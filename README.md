@@ -22,7 +22,7 @@
     <a href="https://github.com/Dantalian5/memory-game"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Dantalian5/memory-game">View Demo</a>
+    <a href="https://gamemorybymv.vercel.app">View Demo</a>
     ·
     <a href="https://github.com/Dantalian5/memory-game/issues">Report Bug</a>
     ·
