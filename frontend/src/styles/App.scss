@@ -11,18 +11,3 @@
   gap: 3.5rem;
   position: relative
 }
-
-.topbar {
-  width: 100%;
-  padding-inline: 1.5rem;
-  padding-block: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  &__logo {
-    font-family: "Yuji Mai", serif;
-    font-size: 3rem;
-
-  }
-}

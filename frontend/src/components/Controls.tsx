@@ -1,27 +1,24 @@
-import "@styles/Controls.scss";
-import { svgCog } from "@/utils/svgIcons";
+import "@styles/components/Controls.scss";
+import Timer from "@components/Timer";
 import { useGameContext } from "@/context/GameContext";
-import { useModalContext } from "@/context/ModalContext";
+import { svgPlay, svgReset } from "@/utils/svgIcons";
 
 function Controls() {
   const gameContext = useGameContext();
-  const modalContext = useModalContext();
-  const { initializeGame } = gameContext;
-  const { setIsSetupOpen } = modalContext;
+  const { initializeGame, gameState } = gameContext;
   return (
     <div className="controls">
       <button className="controls__start" onClick={initializeGame}>
-        Start
+        {gameState.isRunning ? "Restart" : "Start"}
+        {gameState.isRunning ? svgReset : svgPlay}
       </button>
-      <span>time: 00:00</span>
-      <button
-        title="Settings"
-        aria-label="Modify Game Settings"
-        className="controls__settings"
-        onClick={() => setIsSetupOpen(true)}
-      >
-        {svgCog}
-      </button>
+      <Timer />
+      <span className="controls__attempts">
+        Attempts:{" "}
+        <span className="controls__attempts__counter">
+          {gameState.attempts}
+        </span>
+      </span>
     </div>
   );
 }

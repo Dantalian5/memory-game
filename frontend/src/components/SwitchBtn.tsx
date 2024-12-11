@@ -1,4 +1,4 @@
-import "@styles/components/switch-btn.scss";
+import "@styles/components/Switch.scss";
 import { useState } from "react";
 import { svgMoon, svgSun } from "@/utils/svgIcons";
 

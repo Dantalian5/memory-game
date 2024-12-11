@@ -1,7 +1,8 @@
-import "@styles/Setup.scss";
+import "@styles/components/Setup.scss";
 import { useState, useEffect } from "react";
 import { useGameContext } from "@/context/GameContext";
 import { useModalContext } from "@/context/ModalContext";
+import SwitchBtn from "@components/SwitchBtn";
 
 function Setup() {
   const gameContext = useGameContext();
@@ -69,7 +70,10 @@ function Setup() {
     <div className={`${isSetupOpen && "active"} setup`}>
       <div className="setup__overlay" onClick={closeSetup}></div>
       <div className="menu">
-        <button onClick={closeSetup}>back</button>
+        <div className="menu__actions">
+          <button onClick={closeSetup}>back</button>
+          <SwitchBtn />
+        </div>
         <form className="form" onSubmit={submitSetup}>
           <label className="form__input" htmlFor="board-size">
             Board Size:

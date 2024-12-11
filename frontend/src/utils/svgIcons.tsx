@@ -321,3 +321,77 @@ export const svgCog = (
     ></rect>
   </svg>
 );
+export const svgPlay = (
+  <svg
+    key="play"
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill="currentColor"
+      fillOpacity={0}
+      stroke="currentColor"
+      strokeDasharray={40}
+      strokeDashoffset={40}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M8 6l10 6l-10 6Z"
+    >
+      <animate
+        fill="freeze"
+        attributeName="fill-opacity"
+        begin="0.5s"
+        dur="0.5s"
+        values="0;1"
+      ></animate>
+      <animate
+        fill="freeze"
+        attributeName="stroke-dashoffset"
+        dur="0.5s"
+        values="40;0"
+      ></animate>
+    </path>
+  </svg>
+);
+export const svgReset = (
+  <svg
+    key="reset"
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 24 24"
+  >
+    <g
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+    >
+      <path
+        strokeDasharray={32}
+        strokeDashoffset={32}
+        d="M12 6c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6v-2.5"
+      >
+        <animate
+          fill="freeze"
+          attributeName="stroke-dashoffset"
+          dur="0.4s"
+          values="32;0"
+        ></animate>
+      </path>
+      <path strokeDasharray={6} strokeDashoffset={6} d="M6 9l-3 3M6 9l3 3">
+        <animate
+          fill="freeze"
+          attributeName="stroke-dashoffset"
+          begin="0.4s"
+          dur="0.2s"
+          values="6;0"
+        ></animate>
+      </path>
+    </g>
+  </svg>
+);
