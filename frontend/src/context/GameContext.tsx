@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useState, useContext } from "react";
+import {
+  createContext,
+  ReactNode,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
 import { generateCards } from "@/lib/utils";
 
 interface GameState {
@@ -7,14 +13,15 @@ interface GameState {
   attempts: number;
 }
 interface GameSetup {
-  matrixSize: number[];
-  matchesCuantity: number;
+  boardSize: number[];
+  matchingCards: number;
 }
 interface GameContextType {
   gameState: GameState;
   gameSetup: GameSetup;
   initializeGame: () => void;
   setGameState: React.Dispatch<React.SetStateAction<GameState>>;
+  setGameSetup: React.Dispatch<React.SetStateAction<GameSetup>>;
 }
 
 export const GameContext = createContext<GameContextType | null>(null);
@@ -25,26 +32,34 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     matchedCards: [],
     attempts: 0,
   });
+  const [gameSetup, setGameSetup] = useState<GameSetup>({
+    boardSize: [3, 2],
+    matchingCards: 2,
+  });
 
-  const gameSetup = {
-    matrixSize: [3, 2],
-    matchesCuantity: 2,
-  };
-
-  const totalCards = gameSetup.matrixSize[0] * gameSetup.matrixSize[1];
+  const totalCards = gameSetup.boardSize[0] * gameSetup.boardSize[1];
 
   const initializeGame = () => {
-    const cards = generateCards(totalCards, gameSetup.matchesCuantity);
+    const cards = generateCards(totalCards, gameSetup.matchingCards);
     setGameState({
       cards,
       matchedCards: [],
       attempts: 0,
     });
   };
+  useEffect(() => {
+    initializeGame();
+  }, [gameSetup]);
 
   return (
     <GameContext.Provider
-      value={{ gameState, setGameState, gameSetup, initializeGame }}
+      value={{
+        gameState,
+        setGameState,
+        gameSetup,
+        setGameSetup,
+        initializeGame,
+      }}
     >
       {children}
     </GameContext.Provider>

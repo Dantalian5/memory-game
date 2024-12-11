@@ -8,18 +8,15 @@ function Board() {
 
   const { gameState, setGameState, initializeGame, gameSetup } = gameContext;
   const { cards, attempts } = gameState;
-  const { matchesCuantity, matrixSize } = gameSetup;
+  const { matchingCards, boardSize } = gameSetup;
 
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [matchedCards, setMatchedCards] = useState<number[]>([]);
 
   const handleCardClick = (index: number) => {
-    if (
-      flippedCards.length < matchesCuantity &&
-      !flippedCards.includes(index)
-    ) {
+    if (flippedCards.length < matchingCards && !flippedCards.includes(index)) {
       setFlippedCards((prev) => [...prev, index]);
-      if (flippedCards.length === matchesCuantity - 1) {
+      if (flippedCards.length === matchingCards - 1) {
         checkMatch([...flippedCards, index]);
       }
     }
@@ -35,7 +32,7 @@ function Board() {
   useEffect(() => {
     setTimeout(() => {
       if (
-        matchedCards.length === cards.length / matchesCuantity &&
+        matchedCards.length === cards.length / matchingCards &&
         matchedCards.length > 0
       ) {
         alert(`You won in ${attempts} attempts!`);
@@ -49,7 +46,7 @@ function Board() {
     <div
       className="board"
       style={{
-        gridTemplateColumns: `repeat(${matrixSize[0]}, minmax(0px, 200px))`,
+        gridTemplateColumns: `repeat(${boardSize[0]}, minmax(0px, 200px))`,
         gap: "10px",
       }}
     >
