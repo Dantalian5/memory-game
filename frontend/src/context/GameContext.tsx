@@ -1,12 +1,9 @@
 import { createContext, ReactNode, useState, useContext } from "react";
 import { generateCards } from "@/lib/utils";
 
-// Crear el contexto
-
 interface GameState {
   cards: number[];
   matchedCards: number[];
-  flippedCards: number[];
   attempts: number;
 }
 interface GameSetup {
@@ -22,17 +19,15 @@ interface GameContextType {
 
 export const GameContext = createContext<GameContextType | null>(null);
 
-// Proveedor del contexto
 const GameProvider = ({ children }: { children: ReactNode }) => {
   const [gameState, setGameState] = useState<GameState>({
     cards: [],
     matchedCards: [],
-    flippedCards: [],
     attempts: 0,
   });
 
   const gameSetup = {
-    matrixSize: [4, 2],
+    matrixSize: [3, 2],
     matchesCuantity: 2,
   };
 
@@ -43,7 +38,6 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
     setGameState({
       cards,
       matchedCards: [],
-      flippedCards: [],
       attempts: 0,
     });
   };
@@ -58,6 +52,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export default GameProvider;
+
+// GameContext Hook.
 export const useGameContext = (): GameContextType => {
   const context = useContext(GameContext);
   if (!context) {

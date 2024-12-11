@@ -1,5 +1,6 @@
 import "@styles/Board.scss";
 import { useState, useEffect } from "react";
+import Card from "@components/Card";
 import { useGameContext } from "@/context/GameContext";
 
 function Board() {
@@ -7,7 +8,7 @@ function Board() {
 
   const { gameState, setGameState, initializeGame, gameSetup } = gameContext;
   const { cards, attempts } = gameState;
-  const { matchesCuantity } = gameSetup;
+  const { matchesCuantity, matrixSize } = gameSetup;
 
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [matchedCards, setMatchedCards] = useState<number[]>([]);
@@ -33,25 +34,35 @@ function Board() {
   };
   useEffect(() => {
     setTimeout(() => {
-      if (matchedCards.length === cards.length / matchesCuantity) {
+      if (
+        matchedCards.length === cards.length / matchesCuantity &&
+        matchedCards.length > 0
+      ) {
         alert(`You won in ${attempts} attempts!`);
+        setFlippedCards([]);
+        setMatchedCards([]);
         initializeGame();
       }
     }, 1000);
   }, [matchedCards]);
   return (
-    <div className="board">
+    <div
+      className="board"
+      style={{
+        gridTemplateColumns: `repeat(${matrixSize[0]}, minmax(0px, 200px))`,
+        gap: "10px",
+      }}
+    >
       {cards.map((card, index) => (
-        <div
+        <Card
           key={index}
-          className={`${(flippedCards.includes(index) || matchedCards.includes(card)) && "flipped"} card`}
+          isFlipped={
+            flippedCards.includes(index) || matchedCards.includes(card)
+          }
           onClick={() => handleCardClick(index)}
         >
-          <div className="card__inner">
-            <div className="card__front">{card}</div>
-            <div className="card__back">{card}?</div>
-          </div>
-        </div>
+          {card}
+        </Card>
       ))}
     </div>
   );
