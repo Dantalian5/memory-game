@@ -9,7 +9,7 @@ function Controls() {
     <div className="controls">
       <div className="controls__start">
         <button className="controls__start__btn" onClick={initializeGame}>
-          {gameState.isRunning ? "Restart" : "Start"}
+          {gameState.isRunning ? "Restart" : "Shuffle"}
           {gameState.isRunning ? svgReset : svgPlay}
         </button>
       </div>
