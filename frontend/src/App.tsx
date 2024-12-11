@@ -5,19 +5,21 @@ import TopBar from "@/components/TopBar";
 import Controls from "@components/Controls";
 import Board from "@components/Board";
 import Setup from "@components/Setup";
+import Modal from "@components/Modal";
 
 function App() {
   return (
-    <GameProvider>
-      <ModalProvider>
+    <ModalProvider>
+      <GameProvider>
         <div className="body">
           <TopBar />
           <Controls />
           <Board />
           <Setup />
+          <Modal />
         </div>
-      </ModalProvider>
-    </GameProvider>
+      </GameProvider>
+    </ModalProvider>
   );
 }
 

@@ -1,0 +1,84 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  transform: translateX(-100%);
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+
+  &__wrapper {
+    background-color: var(--background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(-90deg);
+    transition: transform 0.5s;
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      background-color: var(--primary);
+      border-radius: 8px;
+      border: 1px solid;
+      z-index: -1;
+    }
+
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  &__body {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 2;
+
+    &>span {
+      font-family: digital;
+    }
+  }
+
+  &__button {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid;
+    border-radius: 99px;
+  }
+}
+
+.active.modal {
+  transform: translateX(0);
+
+  & .modal {
+    &__wrapper {
+      transform: rotateY(0deg);
+    }
+  }
+}

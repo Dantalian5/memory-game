@@ -1,8 +1,9 @@
 .body {
-  width: 100%;
-  max-width: 90rem;
+  width: clamp(21.875rem, 100%, 90rem);
   min-height: 100dvh;
-  padding-inline: 9.375rem;
+  padding-inline: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 10vh;
   background-color: var(--background);
   font-family: "Raleway", sans-serif;
   align-items: center;
@@ -10,4 +11,18 @@
   flex-direction: column;
   gap: 3.5rem;
   position: relative
+}
+
+@media (min-width: 43.75rem) {
+  .body {
+    padding-inline: 3rem;
+    padding-top: 2rem;
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 75rem) {
+  .body {
+    padding-inline: 9.375rem;
+  }
 }

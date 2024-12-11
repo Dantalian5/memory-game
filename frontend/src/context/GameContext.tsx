@@ -6,6 +6,7 @@ import {
   useEffect,
 } from "react";
 import { generateCards } from "@/lib/utils";
+import { useModalContext } from "./ModalContext";
 
 interface GameState {
   cards: number[];
@@ -31,6 +32,8 @@ interface GameContextType {
 export const GameContext = createContext<GameContextType | null>(null);
 
 const GameProvider = ({ children }: { children: ReactNode }) => {
+  const modalContext = useModalContext();
+  const { setIsModalOpen, setWinData } = modalContext;
   const [gameState, setGameState] = useState<GameState>({
     cards: [],
     attempts: 0,
@@ -60,7 +63,8 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const endGame = () => {
     setGameState((prev) => ({ ...prev, isRunning: false }));
-    console.log(gameState);
+    setWinData({ time: timer, attempts: gameState.attempts });
+    setIsModalOpen(true);
     initializeGame();
   };
 

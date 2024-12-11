@@ -8,10 +8,12 @@ function Controls() {
   const { initializeGame, gameState } = gameContext;
   return (
     <div className="controls">
-      <button className="controls__start" onClick={initializeGame}>
-        {gameState.isRunning ? "Restart" : "Start"}
-        {gameState.isRunning ? svgReset : svgPlay}
-      </button>
+      <div className="controls__start">
+        <button className="controls__start__btn" onClick={initializeGame}>
+          {gameState.isRunning ? "Restart" : "Start"}
+          {gameState.isRunning ? svgReset : svgPlay}
+        </button>
+      </div>
       <Timer />
       <span className="controls__attempts">
         Attempts:{" "}

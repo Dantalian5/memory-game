@@ -2,18 +2,30 @@ import { createContext, ReactNode, useState, useContext } from "react";
 
 interface ModalContextType {
   isSetupOpen: boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSetupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  winData: { time: number; attempts: number };
+  setWinData: React.Dispatch<
+    React.SetStateAction<{ time: number; attempts: number }>
+  >;
 }
 
 export const ModalContext = createContext<ModalContextType | null>(null);
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isSetupOpen, setIsSetupOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [winData, setWinData] = useState({ time: 0, attempts: 0 });
   return (
     <ModalContext.Provider
       value={{
         isSetupOpen,
         setIsSetupOpen,
+        isModalOpen,
+        setIsModalOpen,
+        winData,
+        setWinData,
       }}
     >
       {children}
