@@ -29,6 +29,7 @@
   background-color: var(--background);
   border-radius: 8px 8px 8px 8px;
   padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
   &__actions {
     display: flex;
@@ -36,6 +37,10 @@
     gap: 2rem;
     align-items: center;
 
+  }
+
+  &__close {
+    font-size: 2rem;
   }
 }
 
@@ -47,11 +52,29 @@
 
   &__input {
     width: 100%;
-    padding: 0.5rem;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 2rem;
+    flex-direction: column;
+    gap: .5rem;
+
+    & select {
+      all: unset;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border: 2px solid var(--foreground);
+      background: none;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+  }
+
+  &__btn {
+    padding: .5rem 1.5rem;
+    width: fit-content;
+    border: 2px solid var(--foreground);
+    border-radius: 99px;
+    margin-left: auto;
+    margin-top: 1rem;
   }
 }
 

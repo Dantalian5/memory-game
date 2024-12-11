@@ -1,15 +1,14 @@
 import "@styles/components/Setup.scss";
-import { useState, useEffect } from "react";
-import { useGameContext } from "@/context/GameContext";
+import { useState, useEffect, memo } from "react";
+import { useSetupContext } from "@/context/SetupContext";
 import { useModalContext } from "@/context/ModalContext";
 import SwitchBtn from "@components/SwitchBtn";
+import { svgClose } from "@/utils/svgIcons";
 
 function Setup() {
-  const gameContext = useGameContext();
-  const modalContext = useModalContext();
-  const { gameSetup, setGameSetup } = gameContext;
+  const { gameSetup, setGameSetup } = useSetupContext();
+  const { isSetupOpen, setIsSetupOpen } = useModalContext();
   const { boardSize, matchingCards } = gameSetup;
-  const { isSetupOpen, setIsSetupOpen } = modalContext;
   const sizes = [
     [3, 2],
     [4, 2],
@@ -71,7 +70,14 @@ function Setup() {
       <div className="setup__overlay" onClick={closeSetup}></div>
       <div className="menu">
         <div className="menu__actions">
-          <button onClick={closeSetup}>back</button>
+          <button
+            className="menu__close"
+            onClick={closeSetup}
+            title="Close Menu"
+            aria-label="Close Setup Menu"
+          >
+            {isSetupOpen && svgClose}
+          </button>
           <SwitchBtn />
         </div>
         <form className="form" onSubmit={submitSetup}>
@@ -85,7 +91,7 @@ function Setup() {
             >
               {sizes.map((size, index) => (
                 <option key={index} value={index}>
-                  {size[0]}x{size[1]}
+                  {size[0]}x{size[1]} board
                 </option>
               ))}
             </select>
@@ -109,10 +115,12 @@ function Setup() {
               ))}{" "}
             </select>
           </label>
-          <button type="submit">{"Save & Start Game"}</button>
+          <button className="form__btn" type="submit">
+            {"Save"}
+          </button>
         </form>
       </div>
     </div>
   );
 }
-export default Setup;
+export default memo(Setup);

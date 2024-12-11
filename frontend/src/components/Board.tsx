@@ -2,14 +2,14 @@ import "@styles/components/Board.scss";
 import { useState, useEffect } from "react";
 import Card from "@components/Card";
 import { useGameContext } from "@/context/GameContext";
+import { useSetupContext } from "@/context/SetupContext";
+import { svgImg } from "@/utils/svgIcons";
 
 function Board() {
-  const gameContext = useGameContext();
+  const { gameState, setGameState, endGame, startGame } = useGameContext();
 
-  const { gameState, setGameState, gameSetup, endGame, startGame } =
-    gameContext;
   const { cards, isRunning } = gameState;
-  const { matchingCards, boardSize } = gameSetup;
+  const { matchingCards, boardSize } = useSetupContext().gameSetup;
 
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [matchedCards, setMatchedCards] = useState<number[]>([]);
@@ -63,13 +63,11 @@ function Board() {
       {cards.map((card, index) => (
         <Card
           key={index}
-          isFlipped={
-            flippedCards.includes(index) || matchedCards.includes(card)
-          }
+          isFlipped={flippedCards.includes(index)}
+          isMatched={matchedCards.includes(card)}
           onClick={() => handleCardClick(index)}
         >
-          {/* isRunning && card */}
-          {card}
+          {isRunning && svgImg[card]}
         </Card>
       ))}
     </div>

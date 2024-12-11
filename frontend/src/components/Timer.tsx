@@ -1,13 +1,13 @@
 import "@styles/components/Timer.scss";
-import { useGameContext } from "@/context/GameContext";
+import { useTime } from "@/context/TimeContext";
 import { formatTime } from "@/lib/utils";
 
 function Timer() {
-  const gameContext = useGameContext();
-  const { timer } = gameContext;
+  const timeContext = useTime();
+  const { time } = timeContext;
   return (
     <div className="timer" aria-label="Game Time">
-      <span>{formatTime(timer)}</span>
+      <span>{formatTime(time)}</span>
     </div>
   );
 }

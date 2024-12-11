@@ -4,8 +4,7 @@ import { useGameContext } from "@/context/GameContext";
 import { svgPlay, svgReset } from "@/utils/svgIcons";
 
 function Controls() {
-  const gameContext = useGameContext();
-  const { initializeGame, gameState } = gameContext;
+  const { initializeGame, gameState } = useGameContext();
   return (
     <div className="controls">
       <div className="controls__start">

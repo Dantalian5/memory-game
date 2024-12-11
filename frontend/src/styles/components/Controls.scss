@@ -12,9 +12,10 @@
 
     &__btn {
       padding: 0.5rem 1.5rem;
-      border: 1px solid black;
+      border: 1px solid var(--foreground);
       border-radius: 64px;
       font-size: 1.5rem;
+      font-weight: 500;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -27,6 +28,7 @@
 
   &__attempts {
     font-size: 1rem;
+    font-weight: 500;
 
     &__counter {
       font-family: digital;

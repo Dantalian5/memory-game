@@ -1,15 +1,15 @@
-:root {
-  --background: #E3F6FF;
-  --card-back: #90CDF4;
-  --card-front: #FFFFFF;
-  --foreground: #2B6CB0;
+[data-theme='light'] {
+  --background: #f5f5f5;
+  --card: #ffffff;
+  --foreground: #333333;
   --highlight: #38A169;
+  --border: #e0e0e0;
+}
 
-  &[data-theme='dark'] {
-    --background: #1A202C;
-    --card-back: #2D3748;
-    --card-front: #4A5568;
-    --foreground: #EDF2F7;
-    --highlight: #63B3ED;
-  }
+[data-theme='dark'] {
+  --background: #1e1e2f;
+  --card: #0b1e39;
+  --foreground: #ffffff;
+  --highlight: #63B3ED;
+  --border: #424242;
 }

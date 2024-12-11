@@ -4,9 +4,12 @@ import {
   useState,
   useContext,
   useEffect,
+  useMemo,
 } from "react";
 import { generateCards } from "@/lib/utils";
-import { useModalContext } from "./ModalContext";
+import { useModalContext } from "@/context/ModalContext";
+import { useTime } from "@/context/TimeContext";
+import { useSetupContext } from "@/context/SetupContext";
 
 interface GameState {
   cards: number[];
@@ -19,12 +22,8 @@ interface GameSetup {
 }
 interface GameContextType {
   gameState: GameState;
-  gameSetup: GameSetup;
-  timer: number;
   initializeGame: () => void;
   setGameState: React.Dispatch<React.SetStateAction<GameState>>;
-  setGameSetup: React.Dispatch<React.SetStateAction<GameSetup>>;
-  setTimer: React.Dispatch<React.SetStateAction<number>>;
   startGame: () => void;
   endGame: () => void;
 }
@@ -33,28 +32,25 @@ export const GameContext = createContext<GameContextType | null>(null);
 
 const GameProvider = ({ children }: { children: ReactNode }) => {
   const modalContext = useModalContext();
+  const { boardSize, matchingCards } = useSetupContext().gameSetup;
+  const timeContext = useTime();
   const { setIsModalOpen, setWinData } = modalContext;
+  const { time, setIsRunning } = timeContext;
   const [gameState, setGameState] = useState<GameState>({
     cards: [],
     attempts: 0,
     isRunning: false,
   });
-  const [gameSetup, setGameSetup] = useState<GameSetup>({
-    boardSize: [3, 2],
-    matchingCards: 2,
-  });
-  const [timer, setTimer] = useState<number>(0);
 
-  const totalCards = gameSetup.boardSize[0] * gameSetup.boardSize[1];
+  const totalCards = boardSize[0] * boardSize[1];
 
   const initializeGame = () => {
-    const cards = generateCards(totalCards, gameSetup.matchingCards);
+    const cards = generateCards(totalCards, matchingCards);
     setGameState({
       cards,
       attempts: 0,
       isRunning: false,
     });
-    setTimer(0);
   };
 
   const startGame = () => {
@@ -63,45 +59,31 @@ const GameProvider = ({ children }: { children: ReactNode }) => {
 
   const endGame = () => {
     setGameState((prev) => ({ ...prev, isRunning: false }));
-    setWinData({ time: timer, attempts: gameState.attempts });
+    setWinData({ time: time, attempts: gameState.attempts });
     setIsModalOpen(true);
     initializeGame();
   };
 
   useEffect(() => {
     initializeGame();
-  }, [gameSetup]);
+  }, [boardSize, matchingCards]);
 
   useEffect(() => {
-    let interval: any | null = null;
-
-    if (gameState.isRunning) {
-      interval = setInterval(() => {
-        setTimer((prev) => prev + 1);
-      }, 1000);
-    } else if (!gameState.isRunning && interval) {
-      clearInterval(interval);
-    }
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
+    setIsRunning(gameState.isRunning);
   }, [gameState.isRunning]);
 
+  const gameContextValue = useMemo(
+    () => ({
+      gameState,
+      setGameState,
+      initializeGame,
+      startGame,
+      endGame,
+    }),
+    [gameState],
+  );
   return (
-    <GameContext.Provider
-      value={{
-        gameState,
-        setGameState,
-        gameSetup,
-        setGameSetup,
-        timer,
-        setTimer,
-        initializeGame,
-        startGame,
-        endGame,
-      }}
-    >
+    <GameContext.Provider value={gameContextValue}>
       {children}
     </GameContext.Provider>
   );

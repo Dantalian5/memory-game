@@ -19,6 +19,10 @@
 
   transform-style: preserve-3d;
 
+  &.matched {
+    color: var(--highlight);
+  }
+
   &__inner {
     position: relative;
     width: 100%;
@@ -26,17 +30,18 @@
     transition: transform 0.5s;
     transform-style: preserve-3d;
     cursor: pointer;
-    border: 1px solid #000;
+    border: 1px solid var(--foreground);
     z-index: 10;
     border-radius: 16px;
     box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    background-color: var(--card);
 
     &::before {
       position: absolute;
       content: '';
       inset: min(5%, 10px);
       border-radius: 12px;
-      border: 1px solid #000;
+      border: 1px solid var(--border);
       z-index: 20;
     }
   }
@@ -59,6 +64,14 @@
 
   &__front {
     transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & svg {
+      width: 80%;
+      height: 80%;
+    }
   }
 }
 

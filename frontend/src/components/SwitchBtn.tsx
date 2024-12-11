@@ -1,21 +1,19 @@
 import "@styles/components/Switch.scss";
-import { useState } from "react";
+import { useTheme } from "@/context/ThemeContext";
 import { svgMoon, svgSun } from "@/utils/svgIcons";
 
 function SwitchBtn() {
-  const [isActive, setIsActive] = useState(false);
+  const themeContext = useTheme();
+  const { theme, toogleTheme } = themeContext;
 
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
   return (
     <button
       title="Change Color Theme"
       aria-label="Change Color Theme"
-      onClick={handleClick}
+      onClick={toogleTheme}
       className="switch-btn"
     >
-      {isActive ? (
+      {theme === "light" ? (
         <span className="switch-btn__sun">{svgSun}</span>
       ) : (
         <span className="switch-btn__moon">{svgMoon}</span>

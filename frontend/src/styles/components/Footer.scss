@@ -1,0 +1,13 @@
+.footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__info {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
